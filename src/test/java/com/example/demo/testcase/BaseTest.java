@@ -15,13 +15,11 @@ public class BaseTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	protected WebDriver driver;
 
-	
 	@BeforeTest
 	public void beforeTest() {
-		driver.get("https://www.126.com");
 		driver.manage().timeouts().pageLoadTimeout(50,TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		
+		driver.get("https://www.126.com");
 	}
 	@AfterTest
 	public void afterTest() {
