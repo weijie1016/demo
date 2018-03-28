@@ -4,7 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.page.HomePage;
 import com.example.demo.page.LoginPage;
 
 public class LoginPageImpl implements LoginPage {
@@ -14,28 +16,34 @@ public class LoginPageImpl implements LoginPage {
 	private WebElement username;
 	@FindBy(name="password")
 	private WebElement password;
-	@FindBy(linkText="登  录")
+	@FindBy(id="dologin")
 	private WebElement loginBtn;
 	private WebDriver driver;
+	@Autowired
+	private HomePage homePage;
+	
 	public LoginPageImpl(WebDriver driver) {
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 	
+
 	@Override
-	public void selectFrame() {
+	public LoginPage inputUsername(String username) {
 		driver.switchTo().frame(frame);
-	}
-	
-	@Override
-	public void inputUsername(String username) {
 		this.username.sendKeys(username);
+		return this;
 	}
 	@Override
-	public void inputPassword(String password) {
+	public LoginPage inputPassword(String password) {
 		this.password.sendKeys(password);
+		return this;
 	}
+
 	@Override
-	public void clickLoginBtn() {
+	public HomePage clickLoginBtn() {
 		loginBtn.click();
+		driver.switchTo().defaultContent();
+		return homePage;
 	}
 }

@@ -6,11 +6,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	<context:component-scan base-package="com.example.demo" />
-	<bean id="driver" class="org.openqa.selenium.firefox.FirefoxDriver" />
-	<bean id="loginPage" class="com.example.demo.page.impl.LoginPageImpl">
-		<constructor-arg ref="driver" />
-	</bean>
-	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	
+	<!-- bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="targetClass">
 			<value>java.lang.System</value>
 		</property>
@@ -20,9 +17,18 @@
 		<property name="arguments">
 			<list>
 				<value>webdriver.gecko.driver</value>
-				<value>D:\sts-bundle\workspace\demo\src\test\resources\geckodriver.exe</value>
+				<value>D:\\sts-bundle\\workspace\\demo\\src\\test\\resources\\geckodriver.exe</value>
 			</list>
 		</property>
-	</bean>
+	</bean -->
+
+	<!-- bean id="driver" class="org.openqa.selenium.firefox.FirefoxDriver" /-->
+	<bean id="driver" class="org.openqa.selenium.chrome.ChromeDriver" />
 	
+	<bean id="loginPage" class="com.example.demo.page.impl.LoginPageImpl">
+		<constructor-arg ref="driver" />
+	</bean>
+	<bean id="homePage" class="com.example.demo.page.impl.HomePageImpl">
+		<constructor-arg ref="driver" />
+	</bean>
 </beans>
